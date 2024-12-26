@@ -10,6 +10,8 @@ import Landing_Page from './Components/Landing_Page/Landing_Page';
 import Sign_Up from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
+import Consultation from './Components/FindDoctorSearch/Consultation';
+import Notification from './Components/Notification/Notification';
 
 
 // Function component for the main App
@@ -22,12 +24,15 @@ function App() {
           <Navbar/>
           <Routes>
 
-            <Route path="/"         element={<Landing_Page/>}/>
-            <Route path="/sign-up"  element={<Sign_Up/>}/>
-            <Route path="/login"  element={<Login/>}/>
+            <Route path="/" element={<Landing_Page/>}/>
+            <Route path="/sign-up" element={<Sign_Up/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/instant-consultation" element={<InstantConsultation />} />
+            <Route path="/consultation" element={<Consultation />} />
+            <Route path="/find-doctor" element={<Consultation />} />
 
           </Routes>
+          <Notification />
         </BrowserRouter>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
@@ -12,7 +12,26 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      onSubmit({ name, phoneNumber, selectedSlot, selectedDate });
+      console.log('Formulario enviado');
+      
+      // Crear el objeto de la cita
+      const appointmentData = {
+        name,
+        phoneNumber,
+        selectedSlot,
+        selectedDate,
+        doctorName,
+        doctorSpeciality
+      };
+
+      // Guardar la cita en localStorage
+      sessionStorage.setItem('lastAppointment', JSON.stringify(appointmentData));
+      console.log('Appointment Data:', appointmentData);
+
+      // Llamar al onSubmit proporcionado
+      onSubmit(appointmentData);
+      
+      // Limpiar el formulario
       setName('');
       setPhoneNumber('');
       setSelectedSlot('');
@@ -81,4 +100,4 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     );
   };
 
-export default AppointmentForm
+export default AppointmentForm;

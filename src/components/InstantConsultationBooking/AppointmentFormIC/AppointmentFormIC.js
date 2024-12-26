@@ -3,26 +3,25 @@ import React, { useState } from 'react'
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [selectedSlot, setSelectedSlot] = useState('');
-    const [selectedDate, setSelectedDate] = useState('');
-  
-    const handleSlotSelection = (slot) => {
-      setSelectedSlot(slot);
-    };
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      onSubmit({ name, phoneNumber, selectedSlot, selectedDate });
+      
+      // Create appointment data for notification
+      const appointmentData = {
+        doctorName,
+        doctorSpeciality,
+        name,
+        phoneNumber
+      };
+
+      // Store appointment data in sessionStorage for notification
+      sessionStorage.setItem('lastAppointment', JSON.stringify(appointmentData));
+
+      onSubmit({ name, phoneNumber });
       setName('');
       setPhoneNumber('');
-      setSelectedSlot('');
-      setSelectedDate('');
     };
-
-    // Get tomorrow's date as minimum date
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const minDate = tomorrow.toISOString().split('T')[0];
   
     return (
       <form onSubmit={handleFormSubmit} className="appointment-form">
@@ -46,36 +45,7 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="appointmentDate">Appointment Date:</label>
-          <input
-            type="date"
-            id="appointmentDate"
-            value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
-            min={minDate}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="timeSlot">Preferred Time Slot:</label>
-          <select
-            id="timeSlot"
-            value={selectedSlot}
-            onChange={(e) => setSelectedSlot(e.target.value)}
-            required
-          >
-            <option value="">Select a time slot</option>
-            <option value="09:00">09:00 AM</option>
-            <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="12:00">12:00 PM</option>
-            <option value="14:00">02:00 PM</option>
-            <option value="15:00">03:00 PM</option>
-            <option value="16:00">04:00 PM</option>
-            <option value="17:00">05:00 PM</option>
-          </select>
-        </div>
+
         <button type="submit">Book Now</button>
       </form>
     );
