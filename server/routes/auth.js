@@ -71,8 +71,9 @@ router.post('/register',[
                 id: newUser.id,
             }
         }
+        const Name = newUser.name.split(' ')[0];
         const authtoken = jwt.sign(payload, JWT_SECRET);
-        res.json({ authtoken });
+        res.json({ authtoken, Name });
 
     } catch (error) {
         console.error(error);
@@ -106,8 +107,9 @@ router.post('/login', [
                         id: theUser.id
                     }
                 }
+                const Name = theUser.name.split(' ')[0];
                 const authtoken = jwt.sign(payload, JWT_SECRET);
-                return res.status(200).json({ authtoken });
+                return res.status(200).json({ authtoken, Name });
             } else {
                 return res.status(403).json({ error: "Invalid Credentials" });
             }

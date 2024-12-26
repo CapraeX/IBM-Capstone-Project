@@ -26,7 +26,7 @@ const Sign_Up = () => {
     };
 
     const validatePassword = (password) => {
-        return password.length >= 6;
+        return password.length >= 8; // Cambiado a 8 caracteres mínimo
     };
 
     // Function to handle form submission
@@ -50,7 +50,7 @@ const Sign_Up = () => {
         }
 
         if (!validatePassword(password)) {
-            setShowerr('Password must be at least 6 characters long');
+            setShowerr('Password must be at least 8 characters long'); // Actualizado el mensaje de error
             return;
         }
 
@@ -68,6 +68,8 @@ const Sign_Up = () => {
             }),
         });
 
+        console.log("response"+response);
+
         const json = await response.json(); // Parse the response JSON
 
         if (json.authtoken) {
@@ -76,17 +78,18 @@ const Sign_Up = () => {
             sessionStorage.setItem("name", name);
             sessionStorage.setItem("phone", phone);
             sessionStorage.setItem("email", email);
+            sessionStorage.setItem('name', json.Name);
 
             // Redirect user to home page
             navigate("/");
             window.location.reload(); // Refresh the page
         } else {
             if (json.errors) {
-                for (const error of json.errors) {
-                    setShowerr(error.msg); // Show error messages
-                }
+                // Modificación aquí: extraer solo el mensaje de error
+                const errorMessage = json.errors[0]?.msg || 'Error en el registro';
+                setShowerr(errorMessage);
             } else {
-                setShowerr(json.error);
+                setShowerr(json.error || 'Error en el registro');
             }
         }
     };
@@ -151,7 +154,7 @@ const Sign_Up = () => {
                                 name="password" 
                                 id="password" 
                                 className="form-control" 
-                                placeholder="Enter your password (min 6 characters)" 
+                                placeholder="Enter your password (min 8 characters)" 
                                 aria-describedby="helpId"
                             />
                         </div>

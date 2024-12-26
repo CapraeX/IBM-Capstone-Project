@@ -29,7 +29,7 @@ const Login = () => {
     };
 
     const validatePassword = (password) => {
-        return password.length >= 6;
+        return password.length >= 8; // Cambiado a 8 caracteres mínimo
     };
 
     // Function to handle login form submission
@@ -43,7 +43,7 @@ const Login = () => {
         }
 
         if (!validatePassword(password)) {
-            setShowerr('Password must be at least 6 characters long');
+            setShowerr('Password must be at least 8 characters long'); // Actualizado el mensaje de error
             return;
         }
 
@@ -65,6 +65,7 @@ const Login = () => {
             // If authentication token is received, store it in session storage
             sessionStorage.setItem('auth-token', json.authtoken);
             sessionStorage.setItem('email', email);
+            sessionStorage.setItem('name', json.Name);
 
             // Redirect to home page and reload the window
             navigate('/');
@@ -134,7 +135,7 @@ const Login = () => {
                                     name="password"
                                     id="password"
                                     className="form-control"
-                                    placeholder="Enter your password"
+                                    placeholder="Enter your password (min 8 characters)"
                                     aria-describedby="helpId"
                                     style={{
                                         width: '100%',

@@ -1,6 +1,39 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css'
 
 export default function Navbar() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Verificar si el usuario está logueado
+        const authToken = sessionStorage.getItem('auth-token');
+        const storedUserName = sessionStorage.getItem('name'); // Cambiado a 'name' para coincidir con el almacenamiento
+        
+        if (authToken) {
+            setIsLoggedIn(true);
+            setUserName(storedUserName);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('auth-token');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('name'); // Cambiado a 'name'
+        setIsLoggedIn(false);
+        setUserName(''); // Limpiar el nombre de usuario al cerrar sesión
+        navigate('/');
+        window.location.reload();
+    };
+
+    const profileSection = () => {
+      navigate('/profile'); // Asumiendo que tienes una ruta para el perfil
+  };
+
+
 
   return (
     <>
@@ -39,17 +72,56 @@ export default function Navbar() {
             <a href="#">Appointments</a>
           </li>
 
-          <li className="link">
-            <a href="/sign-up">
-              <button className="btn1">Sign Up</button>
-            </a>
-          </li>
-
-          <li className="link">
-            <a href="/login">
-              <button className="btn1">Login</button>
-            </a>
-          </li>
+          {isLoggedIn ? (
+                    <>
+                        <li className="nav-item">
+                            <span 
+                                className="nav-link" 
+                                style={{color: "black", cursor:"pointer"}} 
+                                onClick={profileSection}
+                            >
+                                Welcome, {userName}
+                            </span>
+                        </li>
+                        <li className="nav-item">
+                            <button 
+                                className="nav-link login-btn"
+                                onClick={handleLogout}
+                                style={{
+                                    backgroundColor: '#ff4d4d',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    padding: '8px 20px',
+                                    fontSize: '15px',
+                                    fontWeight: '500',
+                                    cursor: 'pointer',
+                                    marginTop: '0px',
+                                    transition: 'background-color 0.3s ease',
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                    ':hover': {
+                                        backgroundColor: '#ff3333'
+                                    }
+                                }}
+                            >
+                                LogOut
+                            </button>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <li className="nav-item">
+                            <Link className="nav-link login-btn" to="/login">
+                                Log In
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link register-btn" to="/sign-up">
+                                Sign In
+                            </Link>
+                        </li>
+                    </>
+                )}
         </ul>
       </nav>
     </>
