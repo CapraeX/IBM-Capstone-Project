@@ -180,3 +180,38 @@ nav {
     color:white; /* Hover effect */
 }
   
+
+/* Estilos para el contenedor del dropdown */
+.dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  /* Estilos para la lista del dropdown */
+  .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para los elementos de la lista del dropdown */
+  .dropdown ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilos para los elementos de la lista del dropdown al pasar el ratón */
+  .dropdown ul li:hover {
+    background-color: #f2f2f2;
+  }

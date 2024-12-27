@@ -1,0 +1,88 @@
+/* Estilos para el contenedor del perfil */
+.profile-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el título del perfil */
+  .profile-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Estilos para el formulario */
+  .profile-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Estilos para las etiquetas del formulario */
+  .profile-container label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Estilos para los campos de entrada del formulario */
+  .profile-container input[type="text"],
+  .profile-container input[type="email"],
+  .profile-container input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para el botón de guardar */
+  .profile-container button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilos para el botón de guardar al pasar el ratón */
+  .profile-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el botón de editar */
+  .profile-container button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilos para el botón de editar al pasar el ratón */
+  .profile-container button:hover {
+    background-color: #218838;
+  }
+  
+  /* Estilos para los detalles del perfil */
+  .profile-details {
+    text-align: center;
+  }
+  
+  /* Estilos para los mensajes de error */
+  .profile-container .error {
+    color: red;
+    margin-bottom: 20px;
+    text-align: center;
+  }

@@ -24,7 +24,7 @@ const Landing_Page = () => {
                   <div class="blue1 blob"></div> {/* Creating a different blue blob inside the second 'blob-cont' div */}
               </div>
             <h4>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque at quae ducimus. Suscipit omnis quibusdam non cum rem voluptatem!
+              Welcome to StayHealthy, where your well-being is our top priority. We are dedicated to providing you with the best healthcare services, ensuring that you receive the care and attention you deserve. Join us on a journey to better health and a brighter future.
             </h4>
             <a href="#services"> {/* Creating a hyperlink to jump to the 'services' section */}
               <button class="button">Get Started</button> {/* Creating a button with class name 'button' */}
