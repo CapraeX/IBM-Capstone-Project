@@ -8,8 +8,9 @@ const Notification = () => {
     useEffect(() => {
         const checkAppointment = () => {
             const lastAppointment = sessionStorage.getItem('lastAppointment');
+            console.log('Last Appointment00000:', JSON.parse(lastAppointment));
             if (lastAppointment) {
-                setAppointmentData(JSON.parse(lastAppointment));
+                setAppointmentData(JSON.parse(lastAppointment)[0]);
                 setShowNotification(true);
                 // Clear notification from localStorage after showing it
                 localStorage.removeItem('lastAppointment');
@@ -20,7 +21,7 @@ const Notification = () => {
         checkAppointment();
 
         // Check every second
-        const interval = setInterval(checkAppointment, 1000);
+        const interval = setInterval(checkAppointment, 10000);
 
         // Clear interval when component unmounts
         return () => clearInterval(interval);

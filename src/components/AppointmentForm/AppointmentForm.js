@@ -21,12 +21,28 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
         selectedSlot,
         selectedDate,
         doctorName,
-        doctorSpeciality
+        doctorSpeciality,
+        review:''
       };
 
-      // Guardar la cita en localStorage
-      sessionStorage.setItem('lastAppointment', JSON.stringify(appointmentData));
-      console.log('Appointment Data:', appointmentData);
+      // Verificar si el elemento 'lastAppointment' existe en sessionStorage
+      let lastAppointment = sessionStorage.getItem('lastAppointment');
+
+      if (lastAppointment) {
+        // Si existe, convertirlo a un array (si no lo es) y añadirle appointmentData
+        lastAppointment = JSON.parse(lastAppointment);
+        if (!Array.isArray(lastAppointment)) {
+          lastAppointment = [lastAppointment];
+        }
+        lastAppointment.push(appointmentData);
+      } else {
+        // Si no existe, crear el elemento 'lastAppointment' con el valor de appointmentData
+        lastAppointment = [appointmentData];
+      }
+
+      // Guardar el array actualizado en sessionStorage
+      sessionStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+      console.log('Appointment Data:', lastAppointment);
 
       // Llamar al onSubmit proporcionado
       onSubmit(appointmentData);
